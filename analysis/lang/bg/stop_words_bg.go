@@ -7,10 +7,6 @@ import (
 
 const StopName = "stop_bg"
 
-// this content was obtained from:
-// lucene-4.7.2/analysis/common/src/resources/org/apache/lucene/analysis/
-// ` was changed to ' to allow for literal string
-
 var BulgarianStopWords = []byte(`# This file was created by Jacques Savoy and is distributed under the BSD license.
 # See http://members.unine.ch/jacques.savoy/clef/index.html.
 # Also see http://www.opensource.org/licenses/bsd-license.html
@@ -207,9 +203,8 @@ var BulgarianStopWords = []byte(`# This file was created by Jacques Savoy and is
 `)
 
 func TokenMapConstructor(config map[string]interface{}, cache *registry.Cache) (analysis.TokenMap, error) {
-	rv := analysis.NewTokenMap()
-	err := rv.LoadBytes(BulgarianStopWords)
-	return rv, err
+	_ = "STUB: not implemented"
+	return *new(analysis.TokenMap), nil
 }
 
 func init() {

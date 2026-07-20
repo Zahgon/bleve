@@ -7,11 +7,6 @@ import (
 
 const StopName = "stop_en"
 
-// EnglishStopWords is the built-in list of stopwords used by the "stop_en" TokenFilter.
-//
-// this content was obtained from:
-// lucene-4.7.2/analysis/common/src/resources/org/apache/lucene/analysis/snowball/
-// ` was changed to ' to allow for literal string
 var EnglishStopWords = []byte(` | From svn.tartarus.org/snowball/trunk/website/algorithms/english/stop.txt
  | This file is distributed under the BSD License.
  | See http://snowball.tartarus.org/license.php
@@ -334,9 +329,8 @@ very
 `)
 
 func TokenMapConstructor(config map[string]interface{}, cache *registry.Cache) (analysis.TokenMap, error) {
-	rv := analysis.NewTokenMap()
-	err := rv.LoadBytes(EnglishStopWords)
-	return rv, err
+	_ = "STUB: not implemented"
+	return *new(analysis.TokenMap), nil
 }
 
 func init() {

@@ -1,93 +1,34 @@
-//  Copyright (c) 2014 Couchbase, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// 		http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package bleve
 
 import "github.com/blevesearch/bleve/v2/mapping"
 
-// NewIndexMapping creates a new IndexMapping that will use all the default indexing rules
-func NewIndexMapping() *mapping.IndexMappingImpl {
-	return mapping.NewIndexMapping()
-}
+func NewIndexMapping() *mapping.IndexMappingImpl { _ = "STUB: not implemented"; return nil }
 
-// NewDocumentMapping returns a new document mapping
-// with all the default values.
-func NewDocumentMapping() *mapping.DocumentMapping {
-	return mapping.NewDocumentMapping()
-}
+func NewDocumentMapping() *mapping.DocumentMapping { _ = "STUB: not implemented"; return nil }
 
-// NewDocumentStaticMapping returns a new document
-// mapping that will not automatically index parts
-// of a document without an explicit mapping.
-func NewDocumentStaticMapping() *mapping.DocumentMapping {
-	return mapping.NewDocumentStaticMapping()
-}
+func NewDocumentStaticMapping() *mapping.DocumentMapping { _ = "STUB: not implemented"; return nil }
 
-// NewNestedDocumentMapping returns a new document mapping
-// that will treat all objects as nested documents.
-func NewNestedDocumentMapping() *mapping.DocumentMapping {
-	return mapping.NewNestedDocumentMapping()
-}
+func NewNestedDocumentMapping() *mapping.DocumentMapping { _ = "STUB: not implemented"; return nil }
 
-// NewNestedDocumentStaticMapping returns a new document mapping
-// that will treat all objects as nested documents and
-// will not automatically index parts of a nested document
-// without an explicit mapping.
 func NewNestedDocumentStaticMapping() *mapping.DocumentMapping {
-	return mapping.NewNestedDocumentStaticMapping()
+	_ = "STUB: not implemented"
+	return nil
 }
 
-// NewDocumentDisabledMapping returns a new document
-// mapping that will not perform any indexing.
-func NewDocumentDisabledMapping() *mapping.DocumentMapping {
-	return mapping.NewDocumentDisabledMapping()
-}
+func NewDocumentDisabledMapping() *mapping.DocumentMapping { _ = "STUB: not implemented"; return nil }
 
-// NewTextFieldMapping returns a default field mapping for text
-func NewTextFieldMapping() *mapping.FieldMapping {
-	return mapping.NewTextFieldMapping()
-}
+func NewTextFieldMapping() *mapping.FieldMapping { _ = "STUB: not implemented"; return nil }
 
-// NewKeywordFieldMapping returns a field mapping for text using the keyword
-// analyzer, which essentially doesn't apply any specific text analysis.
-func NewKeywordFieldMapping() *mapping.FieldMapping {
-	return mapping.NewKeywordFieldMapping()
-}
+func NewKeywordFieldMapping() *mapping.FieldMapping { _ = "STUB: not implemented"; return nil }
 
-// NewNumericFieldMapping returns a default field mapping for numbers
-func NewNumericFieldMapping() *mapping.FieldMapping {
-	return mapping.NewNumericFieldMapping()
-}
+func NewNumericFieldMapping() *mapping.FieldMapping { _ = "STUB: not implemented"; return nil }
 
-// NewDateTimeFieldMapping returns a default field mapping for dates
-func NewDateTimeFieldMapping() *mapping.FieldMapping {
-	return mapping.NewDateTimeFieldMapping()
-}
+func NewDateTimeFieldMapping() *mapping.FieldMapping { _ = "STUB: not implemented"; return nil }
 
-// NewBooleanFieldMapping returns a default field mapping for booleans
-func NewBooleanFieldMapping() *mapping.FieldMapping {
-	return mapping.NewBooleanFieldMapping()
-}
+func NewBooleanFieldMapping() *mapping.FieldMapping { _ = "STUB: not implemented"; return nil }
 
-func NewGeoPointFieldMapping() *mapping.FieldMapping {
-	return mapping.NewGeoPointFieldMapping()
-}
+func NewGeoPointFieldMapping() *mapping.FieldMapping { _ = "STUB: not implemented"; return nil }
 
-func NewGeoShapeFieldMapping() *mapping.FieldMapping {
-	return mapping.NewGeoShapeFieldMapping()
-}
+func NewGeoShapeFieldMapping() *mapping.FieldMapping { _ = "STUB: not implemented"; return nil }
 
-func NewIPFieldMapping() *mapping.FieldMapping {
-	return mapping.NewIPFieldMapping()
-}
+func NewIPFieldMapping() *mapping.FieldMapping { _ = "STUB: not implemented"; return nil }

@@ -1,17 +1,3 @@
-// Copyright © 2016 Couchbase, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// 		http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package cmd
 
 import (
@@ -27,7 +13,6 @@ var limit, skip, repeat int
 var explain, highlight, fields bool
 var qtype, qfield, sortby string
 
-// queryCmd represents the query command
 var queryCmd = &cobra.Command{
 	Use:   "query [index path] [query]",
 	Short: "queries the index",
@@ -63,28 +48,7 @@ var queryCmd = &cobra.Command{
 	},
 }
 
-func buildQuery(args []string) query.Query {
-	var q query.Query
-	switch qtype {
-	case "prefix":
-		pquery := bleve.NewPrefixQuery(strings.Join(args[1:], " "))
-		if qfield != "" {
-			pquery.SetField(qfield)
-		}
-		q = pquery
-	case "term":
-		pquery := bleve.NewTermQuery(strings.Join(args[1:], " "))
-		if qfield != "" {
-			pquery.SetField(qfield)
-		}
-		q = pquery
-	default:
-		// build a search with the provided parameters
-		queryString := strings.Join(args[1:], " ")
-		q = bleve.NewQueryStringQuery(queryString)
-	}
-	return q
-}
+func buildQuery(args []string) query.Query { _ = "STUB: not implemented"; return *new(query.Query) }
 
 func init() {
 	RootCmd.AddCommand(queryCmd)

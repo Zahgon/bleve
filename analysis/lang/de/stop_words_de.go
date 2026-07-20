@@ -7,10 +7,6 @@ import (
 
 const StopName = "stop_de"
 
-// this content was obtained from:
-// lucene-4.7.2/analysis/common/src/resources/org/apache/lucene/analysis/snowball/
-// ` was changed to ' to allow for literal string
-
 var GermanStopWords = []byte(` | From svn.tartarus.org/snowball/trunk/website/algorithms/german/stop.txt
  | This file is distributed under the BSD License.
  | See http://snowball.tartarus.org/license.php
@@ -308,9 +304,8 @@ zwischen       |  between
 `)
 
 func TokenMapConstructor(config map[string]interface{}, cache *registry.Cache) (analysis.TokenMap, error) {
-	rv := analysis.NewTokenMap()
-	err := rv.LoadBytes(GermanStopWords)
-	return rv, err
+	_ = "STUB: not implemented"
+	return *new(analysis.TokenMap), nil
 }
 
 func init() {
