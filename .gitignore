@@ -18,3 +18,7 @@ vendor/**
 *.test
 tags
 go.sum
+
+.aider*
+logs/
+vendor/
