@@ -1,30 +1,5 @@
-//  Copyright (c) 2017 Couchbase, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// 		http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package scorch
 
-import (
-	"reflect"
-	"sync/atomic"
-
-	"github.com/blevesearch/bleve/v2/util"
-)
-
-// Stats tracks statistics about the index, fields that are
-// prefixed like CurXxxx are gauges (can go up and down),
-// and fields that are prefixed like TotXxxx are monotonically
-// increasing counters.
 type Stats struct {
 	TotUpdates uint64
 	TotDeletes uint64
@@ -150,23 +125,6 @@ type Stats struct {
 	TotTrainFireIndexEvents    uint64
 }
 
-// atomically populates the returned map
-func (s *Stats) ToMap() map[string]interface{} {
-	m := map[string]interface{}{}
-	sve := reflect.ValueOf(s).Elem()
-	svet := sve.Type()
-	for i := 0; i < svet.NumField(); i++ {
-		svef := sve.Field(i)
-		if svef.CanAddr() {
-			svefp := svef.Addr().Interface()
-			m[svet.Field(i).Name] = atomic.LoadUint64(svefp.(*uint64))
-		}
-	}
-	return m
-}
+func (s *Stats) ToMap() map[string]interface{} { _ = "STUB: not implemented"; return nil }
 
-// MarshalJSON implements json.Marshaler, and in contrast to standard
-// json marshaling provides atomic safety
-func (s *Stats) MarshalJSON() ([]byte, error) {
-	return util.MarshalJSON(s.ToMap())
-}
+func (s *Stats) MarshalJSON() ([]byte, error) { _ = "STUB: not implemented"; return nil, nil }

@@ -1,31 +1,13 @@
-//  Copyright (c) 2020 Couchbase, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// 		http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package hr
 
 import (
 	"regexp"
-	"strings"
 
 	"github.com/blevesearch/bleve/v2/analysis"
 	"github.com/blevesearch/bleve/v2/registry"
 )
 
 const StemmerName = "stemmer_hr"
-
-// These regular expressions rules originated from:
-// http://nlp.ffzg.hr/resources/tools/stemmer-for-croatian/
 
 var stemmingRules = []*regexp.Regexp{
 	regexp.MustCompile(`^(.+(s|š)k)(ijima|ijega|ijemu|ijem|ijim|ijih|ijoj|ijeg|iji|ije|ija|oga|ome|omu|ima|og|om|im|ih|oj|i|e|o|a|u)$`),
@@ -105,47 +87,24 @@ var stemmingRules = []*regexp.Regexp{
 
 var highlightVowelRRegex = regexp.MustCompile(`(^|[^aeiou])r($|[^aeiou])`)
 
-func highlightVowelR(term string) string {
-	return highlightVowelRRegex.ReplaceAllString(term, `${1}R${2}`)
-}
+func highlightVowelR(term string) string { _ = "STUB: not implemented"; return "" }
 
-func hasVowel(term string) bool {
-	term = highlightVowelR(term)
-	return strings.ContainsAny(term, "aeiouR")
-}
+func hasVowel(term string) bool { _ = "STUB: not implemented"; return false }
 
-func stem(term string) string {
-	for _, rule := range stemmingRules {
-		results := rule.FindStringSubmatch(term)
-		if len(results) == 0 {
-			continue
-		}
-
-		root := results[1]
-		if hasVowel(root) && root != "" {
-			return root
-		}
-	}
-
-	return term
-}
+func stem(term string) string { _ = "STUB: not implemented"; return "" }
 
 type CroatianStemmerFilter struct{}
 
-func NewCroatianStemmerFilter() *CroatianStemmerFilter {
-	return &CroatianStemmerFilter{}
-}
+func NewCroatianStemmerFilter() *CroatianStemmerFilter { _ = "STUB: not implemented"; return nil }
 
 func (s *CroatianStemmerFilter) Filter(input analysis.TokenStream) analysis.TokenStream {
-	for _, token := range input {
-		token.Term = []byte(stem(string(token.Term)))
-	}
-
-	return input
+	_ = "STUB: not implemented"
+	return *new(analysis.TokenStream)
 }
 
 func CroatianStemmerFilterConstructor(config map[string]interface{}, cache *registry.Cache) (analysis.TokenFilter, error) {
-	return NewCroatianStemmerFilter(), nil
+	_ = "STUB: not implemented"
+	return *new(analysis.TokenFilter), nil
 }
 
 func init() {

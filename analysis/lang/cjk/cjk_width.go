@@ -1,23 +1,6 @@
-//  Copyright (c) 2016 Couchbase, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// 		http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package cjk
 
 import (
-	"bytes"
-	"unicode/utf8"
-
 	"github.com/blevesearch/bleve/v2/analysis"
 	"github.com/blevesearch/bleve/v2/registry"
 )
@@ -26,34 +9,11 @@ const WidthName = "cjk_width"
 
 type CJKWidthFilter struct{}
 
-func NewCJKWidthFilter() *CJKWidthFilter {
-	return &CJKWidthFilter{}
-}
+func NewCJKWidthFilter() *CJKWidthFilter { _ = "STUB: not implemented"; return nil }
 
 func (s *CJKWidthFilter) Filter(input analysis.TokenStream) analysis.TokenStream {
-	for _, token := range input {
-		runeCount := utf8.RuneCount(token.Term)
-		runes := bytes.Runes(token.Term)
-		for i := 0; i < runeCount; i++ {
-			ch := runes[i]
-			if ch >= 0xFF01 && ch <= 0xFF5E {
-				// fullwidth ASCII variants
-				runes[i] -= 0xFEE0
-			} else if ch >= 0xFF65 && ch <= 0xFF9F {
-				// halfwidth Katakana variants
-				if (ch == 0xFF9E || ch == 0xFF9F) && i > 0 && combine(runes, i, ch) {
-					runes = analysis.DeleteRune(runes, i)
-					i--
-					runeCount = len(runes)
-				} else {
-					runes[i] = kanaNorm[ch-0xFF65]
-				}
-			}
-		}
-		token.Term = analysis.BuildTermFromRunes(runes)
-	}
-
-	return input
+	_ = "STUB: not implemented"
+	return *new(analysis.TokenStream)
 }
 
 var kanaNorm = []rune{
@@ -79,21 +39,11 @@ var kanaCombineHalfVoiced = []rune{
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 }
 
-func combine(text []rune, pos int, r rune) bool {
-	prev := text[pos-1]
-	if prev >= 0x30A6 && prev <= 0x30FD {
-		if r == 0xFF9F {
-			text[pos-1] += kanaCombineHalfVoiced[prev-0x30A6]
-		} else {
-			text[pos-1] += kanaCombineVoiced[prev-0x30A6]
-		}
-		return text[pos-1] != prev
-	}
-	return false
-}
+func combine(text []rune, pos int, r rune) bool { _ = "STUB: not implemented"; return false }
 
 func CJKWidthFilterConstructor(config map[string]interface{}, cache *registry.Cache) (analysis.TokenFilter, error) {
-	return NewCJKWidthFilter(), nil
+	_ = "STUB: not implemented"
+	return *new(analysis.TokenFilter), nil
 }
 
 func init() {

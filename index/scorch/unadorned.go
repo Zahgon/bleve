@@ -1,17 +1,3 @@
-//  Copyright (c) 2020 Couchbase, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// 		http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package scorch
 
 import (
@@ -38,156 +24,118 @@ func init() {
 type unadornedPostingsIteratorBitmap struct {
 	actual   roaring.IntPeekable
 	actualBM *roaring.Bitmap
-	next     UnadornedPosting // reused across Next() calls
+	next     UnadornedPosting
 }
 
 func (i *unadornedPostingsIteratorBitmap) Next() (segment.Posting, error) {
-	return i.nextAtOrAfter(0)
+	_ = "STUB: not implemented"
+	return *new(segment.Posting), nil
 }
 
 func (i *unadornedPostingsIteratorBitmap) Advance(docNum uint64) (segment.Posting, error) {
-	return i.nextAtOrAfter(docNum)
+	_ = "STUB: not implemented"
+	return *new(segment.Posting), nil
 }
 
 func (i *unadornedPostingsIteratorBitmap) nextAtOrAfter(atOrAfter uint64) (segment.Posting, error) {
-	docNum, exists := i.nextDocNumAtOrAfter(atOrAfter)
-	if !exists {
-		return nil, nil
-	}
-	i.next = UnadornedPosting{} // clear the struct
-	rv := &i.next
-	rv.docNum = docNum
-	return rv, nil
+	_ = "STUB: not implemented"
+	return *new(segment.Posting), nil
 }
 
 func (i *unadornedPostingsIteratorBitmap) nextDocNumAtOrAfter(atOrAfter uint64) (uint64, bool) {
-	if i.actual == nil || !i.actual.HasNext() {
-		return 0, false
-	}
-	i.actual.AdvanceIfNeeded(uint32(atOrAfter))
-
-	if !i.actual.HasNext() {
-		return 0, false // couldn't find anything
-	}
-
-	return uint64(i.actual.Next()), true
+	_ = "STUB: not implemented"
+	return 0, false
 }
 
-func (i *unadornedPostingsIteratorBitmap) Size() int {
-	return reflectStaticSizeUnadornedPostingsIteratorBitmap
-}
+func (i *unadornedPostingsIteratorBitmap) Size() int { _ = "STUB: not implemented"; return 0 }
 
-func (i *unadornedPostingsIteratorBitmap) BytesRead() uint64 {
-	return 0
-}
+func (i *unadornedPostingsIteratorBitmap) BytesRead() uint64 { _ = "STUB: not implemented"; return 0 }
 
 func (i *unadornedPostingsIteratorBitmap) BytesWritten() uint64 {
+	_ = "STUB: not implemented"
 	return 0
 }
 
-func (i *unadornedPostingsIteratorBitmap) ResetBytesRead(uint64) {}
+func (i *unadornedPostingsIteratorBitmap) ResetBytesRead(uint64) { _ = "STUB: not implemented"; return }
 
 func (i *unadornedPostingsIteratorBitmap) ActualBitmap() *roaring.Bitmap {
-	return i.actualBM
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (i *unadornedPostingsIteratorBitmap) DocNum1Hit() (uint64, bool) {
+	_ = "STUB: not implemented"
 	return 0, false
 }
 
 func (i *unadornedPostingsIteratorBitmap) ReplaceActual(actual *roaring.Bitmap) {
-	i.actualBM = actual
-	i.actual = actual.Iterator()
+	_ = "STUB: not implemented"
+	return
 }
 
-// Resets the iterator to the beginning of the postings list.
-// by resetting the actual iterator.
-func (i *unadornedPostingsIteratorBitmap) ResetIterator() {
-	i.actual = i.actualBM.Iterator()
-}
+func (i *unadornedPostingsIteratorBitmap) ResetIterator() { _ = "STUB: not implemented"; return }
 
 func newUnadornedPostingsIteratorFromBitmap(bm *roaring.Bitmap) segment.PostingsIterator {
-	return &unadornedPostingsIteratorBitmap{
-		actualBM: bm,
-		actual:   bm.Iterator(),
-	}
+	_ = "STUB: not implemented"
+	return *new(segment.PostingsIterator)
 }
 
 const docNum1HitFinished = math.MaxUint64
 
 type unadornedPostingsIterator1Hit struct {
-	docNumOrig uint64           // original 1-hit docNum used to create this iterator
-	docNum     uint64           // current docNum
-	next       UnadornedPosting // reused across Next() calls
+	docNumOrig uint64
+	docNum     uint64
+	next       UnadornedPosting
 }
 
 func (i *unadornedPostingsIterator1Hit) Next() (segment.Posting, error) {
-	return i.nextAtOrAfter(0)
+	_ = "STUB: not implemented"
+	return *new(segment.Posting), nil
 }
 
 func (i *unadornedPostingsIterator1Hit) Advance(docNum uint64) (segment.Posting, error) {
-	return i.nextAtOrAfter(docNum)
+	_ = "STUB: not implemented"
+	return *new(segment.Posting), nil
 }
 
 func (i *unadornedPostingsIterator1Hit) nextAtOrAfter(atOrAfter uint64) (segment.Posting, error) {
-	docNum, exists := i.nextDocNumAtOrAfter(atOrAfter)
-	if !exists {
-		return nil, nil
-	}
-	i.next = UnadornedPosting{} // clear the struct
-	rv := &i.next
-	rv.docNum = docNum
-	return rv, nil
+	_ = "STUB: not implemented"
+	return *new(segment.Posting), nil
 }
 
 func (i *unadornedPostingsIterator1Hit) nextDocNumAtOrAfter(atOrAfter uint64) (uint64, bool) {
-	if i.docNum == docNum1HitFinished {
-		return 0, false
-	}
-	if i.docNum < atOrAfter {
-		// advanced past our 1-hit
-		i.docNum = docNum1HitFinished // consume our 1-hit docNum
-		return 0, false
-	}
-	docNum := i.docNum
-	i.docNum = docNum1HitFinished // consume our 1-hit docNum
-	return docNum, true
+	_ = "STUB: not implemented"
+	return 0, false
 }
 
-func (i *unadornedPostingsIterator1Hit) Size() int {
-	return reflectStaticSizeUnadornedPostingsIterator1Hit
+func (i *unadornedPostingsIterator1Hit) Size() int { _ = "STUB: not implemented"; return 0 }
+
+func (i *unadornedPostingsIterator1Hit) BytesRead() uint64 { _ = "STUB: not implemented"; return 0 }
+
+func (i *unadornedPostingsIterator1Hit) BytesWritten() uint64 { _ = "STUB: not implemented"; return 0 }
+
+func (i *unadornedPostingsIterator1Hit) ResetBytesRead(uint64) { _ = "STUB: not implemented"; return }
+
+func (i *unadornedPostingsIterator1Hit) ActualBitmap() *roaring.Bitmap {
+	_ = "STUB: not implemented"
+	return nil
 }
-
-func (i *unadornedPostingsIterator1Hit) BytesRead() uint64 {
-	return 0
-}
-
-func (i *unadornedPostingsIterator1Hit) BytesWritten() uint64 {
-	return 0
-}
-
-func (i *unadornedPostingsIterator1Hit) ResetBytesRead(uint64) {}
-
-func (i *unadornedPostingsIterator1Hit) ActualBitmap() *roaring.Bitmap { return nil }
 
 func (i *unadornedPostingsIterator1Hit) DocNum1Hit() (uint64, bool) {
-	return i.docNumOrig, true
+	_ = "STUB: not implemented"
+	return 0, false
 }
 
-// ReplaceActual is a no-op: a 1-hit iterator has no actual bitmap, and callers
-// only invoke ReplaceActual on iterators whose ActualBitmap is non-nil.
-func (i *unadornedPostingsIterator1Hit) ReplaceActual(*roaring.Bitmap) {}
-
-// ResetIterator resets the iterator to the original state.
-func (i *unadornedPostingsIterator1Hit) ResetIterator() {
-	i.docNum = i.docNumOrig
+func (i *unadornedPostingsIterator1Hit) ReplaceActual(*roaring.Bitmap) {
+	_ = "STUB: not implemented"
+	return
 }
+
+func (i *unadornedPostingsIterator1Hit) ResetIterator() { _ = "STUB: not implemented"; return }
 
 func newUnadornedPostingsIteratorFrom1Hit(docNum1Hit uint64) segment.PostingsIterator {
-	return &unadornedPostingsIterator1Hit{
-		docNumOrig: docNum1Hit,
-		docNum:     docNum1Hit,
-	}
+	_ = "STUB: not implemented"
+	return *new(segment.PostingsIterator)
 }
 
 type ResetablePostingsIterator interface {
@@ -198,22 +146,12 @@ type UnadornedPosting struct {
 	docNum uint64
 }
 
-func (p *UnadornedPosting) Number() uint64 {
-	return p.docNum
-}
+func (p *UnadornedPosting) Number() uint64 { _ = "STUB: not implemented"; return 0 }
 
-func (p *UnadornedPosting) Frequency() uint64 {
-	return 0
-}
+func (p *UnadornedPosting) Frequency() uint64 { _ = "STUB: not implemented"; return 0 }
 
-func (p *UnadornedPosting) Norm() float64 {
-	return 0
-}
+func (p *UnadornedPosting) Norm() float64 { _ = "STUB: not implemented"; return 0 }
 
-func (p *UnadornedPosting) Locations() []segment.Location {
-	return nil
-}
+func (p *UnadornedPosting) Locations() []segment.Location { _ = "STUB: not implemented"; return nil }
 
-func (p *UnadornedPosting) Size() int {
-	return reflectStaticSizeUnadornedPosting
-}
+func (p *UnadornedPosting) Size() int { _ = "STUB: not implemented"; return 0 }

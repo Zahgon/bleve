@@ -1,21 +1,6 @@
-//  Copyright (c) 2014 Couchbase, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// 		http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package html
 
 import (
-	"bytes"
 	"regexp"
 
 	"github.com/blevesearch/bleve/v2/analysis"
@@ -31,22 +16,13 @@ type CharFilter struct {
 	replacement []byte
 }
 
-func New() *CharFilter {
-	return &CharFilter{
-		r:           htmlCharFilterRegexp,
-		replacement: []byte(" "),
-	}
-}
+func New() *CharFilter { _ = "STUB: not implemented"; return nil }
 
-func (s *CharFilter) Filter(input []byte) []byte {
-	return s.r.ReplaceAllFunc(
-		input, func(in []byte) []byte {
-			return bytes.Repeat(s.replacement, len(in))
-		})
-}
+func (s *CharFilter) Filter(input []byte) []byte { _ = "STUB: not implemented"; return nil }
 
 func CharFilterConstructor(config map[string]interface{}, cache *registry.Cache) (analysis.CharFilter, error) {
-	return New(), nil
+	_ = "STUB: not implemented"
+	return *new(analysis.CharFilter), nil
 }
 
 func init() {

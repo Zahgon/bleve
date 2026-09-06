@@ -1,17 +1,3 @@
-//  Copyright (c) 2014 Couchbase, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// 		http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package null
 
 import (
@@ -24,94 +10,82 @@ const Name = "null"
 type Store struct{}
 
 func New(mo store.MergeOperator, config map[string]interface{}) (store.KVStore, error) {
-	return &Store{}, nil
+	_ = "STUB: not implemented"
+	return *new(store.KVStore), nil
 }
 
-func (i *Store) Close() error {
-	return nil
-}
+func (i *Store) Close() error { _ = "STUB: not implemented"; return nil }
 
 func (i *Store) Reader() (store.KVReader, error) {
-	return &reader{}, nil
+	_ = "STUB: not implemented"
+	return *new(store.KVReader), nil
 }
 
 func (i *Store) Writer() (store.KVWriter, error) {
-	return &writer{}, nil
+	_ = "STUB: not implemented"
+	return *new(store.KVWriter), nil
 }
 
 type reader struct{}
 
-func (r *reader) Get(key []byte) ([]byte, error) {
+func (r *reader) Get(key []byte) ([]byte, error) { _ = "STUB: not implemented"; return nil, nil }
+
+func (r *reader) MultiGet(keys [][]byte) ([][]byte, error) {
+	_ = "STUB: not implemented"
 	return nil, nil
 }
 
-func (r *reader) MultiGet(keys [][]byte) ([][]byte, error) {
-	return make([][]byte, len(keys)), nil
-}
-
 func (r *reader) PrefixIterator(prefix []byte) store.KVIterator {
-	return &iterator{}
+	_ = "STUB: not implemented"
+	return *new(store.KVIterator)
 }
 
 func (r *reader) RangeIterator(start, end []byte) store.KVIterator {
-	return &iterator{}
+	_ = "STUB: not implemented"
+	return *new(store.KVIterator)
 }
 
-func (r *reader) Close() error {
-	return nil
-}
+func (r *reader) Close() error { _ = "STUB: not implemented"; return nil }
 
 type iterator struct{}
 
-func (i *iterator) SeekFirst()    {}
-func (i *iterator) Seek(k []byte) {}
-func (i *iterator) Next()         {}
+func (i *iterator) SeekFirst()    { _ = "STUB: not implemented"; return }
+func (i *iterator) Seek(k []byte) { _ = "STUB: not implemented"; return }
+func (i *iterator) Next()         { _ = "STUB: not implemented"; return }
 
 func (i *iterator) Current() ([]byte, []byte, bool) {
+	_ = "STUB: not implemented"
 	return nil, nil, false
 }
 
-func (i *iterator) Key() []byte {
-	return nil
-}
+func (i *iterator) Key() []byte { _ = "STUB: not implemented"; return nil }
 
-func (i *iterator) Value() []byte {
-	return nil
-}
+func (i *iterator) Value() []byte { _ = "STUB: not implemented"; return nil }
 
-func (i *iterator) Valid() bool {
-	return false
-}
+func (i *iterator) Valid() bool { _ = "STUB: not implemented"; return false }
 
-func (i *iterator) Close() error {
-	return nil
-}
+func (i *iterator) Close() error { _ = "STUB: not implemented"; return nil }
 
 type batch struct{}
 
-func (i *batch) Set(key, val []byte)   {}
-func (i *batch) Delete(key []byte)     {}
-func (i *batch) Merge(key, val []byte) {}
-func (i *batch) Reset()                {}
-func (i *batch) Close() error          { return nil }
+func (i *batch) Set(key, val []byte)   { _ = "STUB: not implemented"; return }
+func (i *batch) Delete(key []byte)     { _ = "STUB: not implemented"; return }
+func (i *batch) Merge(key, val []byte) { _ = "STUB: not implemented"; return }
+func (i *batch) Reset()                { _ = "STUB: not implemented"; return }
+func (i *batch) Close() error          { _ = "STUB: not implemented"; return nil }
 
 type writer struct{}
 
-func (w *writer) NewBatch() store.KVBatch {
-	return &batch{}
-}
+func (w *writer) NewBatch() store.KVBatch { _ = "STUB: not implemented"; return *new(store.KVBatch) }
 
 func (w *writer) NewBatchEx(options store.KVBatchOptions) ([]byte, store.KVBatch, error) {
-	return make([]byte, options.TotalBytes), w.NewBatch(), nil
+	_ = "STUB: not implemented"
+	return nil, *new(store.KVBatch), nil
 }
 
-func (w *writer) ExecuteBatch(store.KVBatch) error {
-	return nil
-}
+func (w *writer) ExecuteBatch(store.KVBatch) error { _ = "STUB: not implemented"; return nil }
 
-func (w *writer) Close() error {
-	return nil
-}
+func (w *writer) Close() error { _ = "STUB: not implemented"; return nil }
 
 func init() {
 	err := registry.RegisterKVStore(Name, New)

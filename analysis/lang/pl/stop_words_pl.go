@@ -7,10 +7,6 @@ import (
 
 const StopName = "stop_pl"
 
-// this content was obtained from:
-// lucene-4.7.2/analysis/common/src/resources/org/apache/lucene/analysis/snowball/
-// ` was changed to ' to allow for literal string
-
 var PolishStopWords = []byte(` | From https://github.com/stopwords-iso/stopwords-pl/tree/master
  | The MIT License (MIT)
  | See https://github.com/stopwords-iso/stopwords-pl/blob/master/LICENSE
@@ -355,9 +351,8 @@ zł				| zloty
 `)
 
 func TokenMapConstructor(config map[string]interface{}, cache *registry.Cache) (analysis.TokenMap, error) {
-	rv := analysis.NewTokenMap()
-	err := rv.LoadBytes(PolishStopWords)
-	return rv, err
+	_ = "STUB: not implemented"
+	return *new(analysis.TokenMap), nil
 }
 
 func init() {

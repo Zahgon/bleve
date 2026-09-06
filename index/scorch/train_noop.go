@@ -1,63 +1,51 @@
-//  Copyright (c) 2026 Couchbase, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// 		http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 //go:build !vectors
 // +build !vectors
 
 package scorch
 
 import (
-	"fmt"
-
 	"github.com/blevesearch/bleve/v2/util"
 	index "github.com/blevesearch/bleve_index_api"
 )
 
 func initTrainer(s *Scorch, config map[string]interface{}) *noopTrainer {
+	_ = "STUB: not implemented"
 	return nil
 }
 
 type noopTrainer struct {
 }
 
-func (t *noopTrainer) trainLoop() {}
+func (t *noopTrainer) trainLoop() { _ = "STUB: not implemented"; return }
 
-func (t *noopTrainer) train(batch *index.Batch) error {
-	return fmt.Errorf("training is not supported with this build")
-}
+func (t *noopTrainer) train(batch *index.Batch) error { _ = "STUB: not implemented"; return nil }
 
 func (t *noopTrainer) loadTrainedData(bucket *util.BoltBucketImpl) error {
-	// noop
+	_ = "STUB: not implemented"
 	return nil
 }
 
 func (t *noopTrainer) getInternal(key []byte) ([]byte, error) {
+	_ = "STUB: not implemented"
 	return nil, nil
 }
 
 func (t *noopTrainer) copyFileLOCKED(file string, d index.IndexDirectory) error {
+	_ = "STUB: not implemented"
 	return nil
 }
 
 func (t *noopTrainer) updateBolt(snapshotsBucket *util.BoltBucketImpl, key []byte, value []byte) error {
+	_ = "STUB: not implemented"
 	return nil
 }
 
 func (t *noopTrainer) dropFileWriterIDs(ids map[string]struct{}) error {
+	_ = "STUB: not implemented"
 	return nil
 }
 
 func (t *noopTrainer) fileWriterIDsInUse() (map[string]struct{}, error) {
+	_ = "STUB: not implemented"
 	return nil, nil
 }

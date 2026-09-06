@@ -7,10 +7,6 @@ import (
 
 const StopName = "stop_tr"
 
-// this content was obtained from:
-// lucene-4.7.2/analysis/common/src/resources/org/apache/lucene/analysis/snowball/
-// ` was changed to ' to allow for literal string
-
 var TurkishStopWords = []byte(`# Turkish stopwords from LUCENE-559
 # merged with the list from "Information Retrieval on Turkish Texts"
 #   (http://www.users.muohio.edu/canf/papers/JASIST2008offPrint.pdf)
@@ -226,9 +222,8 @@ zaten
 `)
 
 func TokenMapConstructor(config map[string]interface{}, cache *registry.Cache) (analysis.TokenMap, error) {
-	rv := analysis.NewTokenMap()
-	err := rv.LoadBytes(TurkishStopWords)
-	return rv, err
+	_ = "STUB: not implemented"
+	return *new(analysis.TokenMap), nil
 }
 
 func init() {

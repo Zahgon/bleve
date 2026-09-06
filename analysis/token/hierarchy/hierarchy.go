@@ -1,10 +1,6 @@
 package hierarchy
 
 import (
-	"bytes"
-	"fmt"
-	"math"
-
 	"github.com/blevesearch/bleve/v2/analysis"
 	"github.com/blevesearch/bleve/v2/registry"
 )
@@ -18,73 +14,24 @@ type HierarchyFilter struct {
 }
 
 func NewHierarchyFilter(delimiter []byte, maxLevels int, splitInput bool) *HierarchyFilter {
-	return &HierarchyFilter{
-		maxLevels:  maxLevels,
-		delimiter:  delimiter,
-		splitInput: splitInput,
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (s *HierarchyFilter) Filter(input analysis.TokenStream) analysis.TokenStream {
-	rv := make(analysis.TokenStream, 0, s.maxLevels)
-
-	var soFar [][]byte
-	for _, token := range input {
-		if s.splitInput {
-			parts := bytes.Split(token.Term, s.delimiter)
-			for _, part := range parts {
-				soFar, rv = s.buildToken(rv, soFar, part)
-				if len(soFar) >= s.maxLevels {
-					return rv
-				}
-			}
-		} else {
-			soFar, rv = s.buildToken(rv, soFar, token.Term)
-			if len(soFar) >= s.maxLevels {
-				return rv
-			}
-		}
-	}
-
-	return rv
+	_ = "STUB: not implemented"
+	return *new(analysis.TokenStream)
 }
 
 func (s *HierarchyFilter) buildToken(tokenStream analysis.TokenStream, soFar [][]byte, part []byte) (
 	[][]byte, analysis.TokenStream) {
-
-	soFar = append(soFar, part)
-	term := bytes.Join(soFar, s.delimiter)
-
-	tokenStream = append(tokenStream, &analysis.Token{
-		Type:     analysis.Shingle,
-		Term:     term,
-		Start:    0,
-		End:      len(term),
-		Position: 1,
-	})
-
-	return soFar, tokenStream
+	_ = "STUB: not implemented"
+	return nil, *new(analysis.TokenStream)
 }
 
 func HierarchyFilterConstructor(config map[string]interface{}, cache *registry.Cache) (analysis.TokenFilter, error) {
-	max := math.MaxInt64
-	maxVal, ok := config["max"].(float64)
-	if ok {
-		max = int(maxVal)
-	}
-
-	splitInput := true
-	splitInputVal, ok := config["split_input"].(bool)
-	if ok {
-		splitInput = splitInputVal
-	}
-
-	delimiter, ok := config["delimiter"].(string)
-	if !ok {
-		return nil, fmt.Errorf("must specify delimiter")
-	}
-
-	return NewHierarchyFilter([]byte(delimiter), max, splitInput), nil
+	_ = "STUB: not implemented"
+	return *new(analysis.TokenFilter), nil
 }
 
 func init() {
